@@ -27,7 +27,7 @@ OE_LOG_DIR="/var/log/$OE_USER"
 
 IS_ENTERPRISE="False"                    # needs access to github.com/odoo/enterprise
 INSTALL_WKHTMLTOPDF="True"
-INSTALL_NGINX="True"
+INSTALL_NGINX="False"
 ENABLE_SSL="False"                       # needs a real WEBSITE_NAME and ADMIN_EMAIL
 WEBSITE_NAME="_"                         # e.g. erp.example.com
 ADMIN_EMAIL="odoo@example.com"           # real email, only used for certbot
@@ -35,12 +35,15 @@ ADMIN_EMAIL="odoo@example.com"           # real email, only used for certbot
 # Superadmin (database manager) password.
 # "True" = generate randomly, "False" = use OE_SUPERADMIN below.
 GENERATE_RANDOM_PASSWORD="True"
-OE_SUPERADMIN="change-me"
+OE_SUPERADMIN="admin_passwd"
 
 # Optional third-party addons repo (leave empty to skip). Must have a 20.0-compatible branch.
-COMMUNITY_ADDONS_REPO="https://github.com/Kaylat30/community-addons"
-COMMUNITY_ADDONS_BRANCH="main"
-COMMUNITY_ADDONS_SUBDIRS="accountant_community payroll_community studio_community ai_community"
+# COMMUNITY_ADDONS_REPO="https://github.com/Kaylat30/community-addons"
+# COMMUNITY_ADDONS_BRANCH="main"
+# COMMUNITY_ADDONS_SUBDIRS="accountant_community payroll_community studio_community ai_community"
+COMMUNITY_ADDONS_REPO=""
+COMMUNITY_ADDONS_BRANCH=""
+COMMUNITY_ADDONS_SUBDIRS=""
 
 # Workers: leave empty for auto (based on CPU and RAM), or set a number (min 2).
 WORKERS=""
@@ -245,6 +248,7 @@ limit_time_cpu = 600
 limit_time_real = 1200
 ;dbfilter = ^%d$
 ;list_db = False
+;http_interface = 0.0.0.0
 EOF
 chown "$OE_USER:$OE_USER" "/etc/${OE_CONFIG}.conf"
 chmod 640 "/etc/${OE_CONFIG}.conf"
